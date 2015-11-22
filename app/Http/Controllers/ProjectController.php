@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\ClientRepository;
-use App\Services\ClientService;
+use App\Repositories\ProjectRepository;
+use App\Services\ProjectService;
 
-class ClientController extends Controller
+class ProjectController extends Controller
 {
     /**
      *
-     * @var ClientRepository
+     * @var ProjectRepository
      */
     protected $repository;
     
     /**
      *
-     * @var ClientService
+     * @var ProjectService
      */
     protected $service;
 
-    public function __construct(ClientRepository $repository, ClientService $service)
+    public function __construct(ProjectRepository $repository, ProjectService $service)
     {
         $this->repository = $repository;
         $this->service    = $service;
@@ -33,7 +33,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return $this->repository->all();
+        return $this->repository->with(array('user', 'client'))->all();
     }
 
     /**

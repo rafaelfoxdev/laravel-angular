@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
-{
+class Client extends Model {
+
     protected $fillable = [
         'name',
         'responsible',
@@ -14,4 +14,9 @@ class Client extends Model
         'address',
         'obs'
     ];
+
+    public function projects() {
+        return $this->hasMany('App\Entities\Project');
+    }
+
 }

@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Client::class, function (Faker\Generator $faker) {
+$factory->define(App\Entities\Client::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'responsible' => $faker->name,
@@ -28,5 +28,17 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'obs' => $faker->sentence,
+    ];
+});
+
+$factory->define(App\Entities\Project::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => \App\Entities\User::all()->lists('id')->random(1),
+        'client_id' => \App\Entities\Client::all()->lists('id')->random(1),
+        'name' => $faker->name,
+        'description' => $faker->sentence,
+        'progress' => $faker->NumberBetween(0,100),
+        'status' => $faker->numberBetween(1,3),
+        'due_date' => $faker->dateTime,
     ];
 });
