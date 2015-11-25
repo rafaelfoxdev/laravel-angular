@@ -35,10 +35,10 @@ $factory->define(App\Entities\Project::class, function (Faker\Generator $faker) 
     return [
         'user_id' => \App\Entities\User::all()->lists('id')->random(1),
         'client_id' => \App\Entities\Client::all()->lists('id')->random(1),
-        'name' => $faker->name,
+        'name' => $faker->word,
         'description' => $faker->sentence,
         'progress' => $faker->NumberBetween(0,100),
         'status' => $faker->numberBetween(1,3),
-        'due_date' => $faker->dateTime,
+        'due_date' => $faker->date,
     ];
 });
